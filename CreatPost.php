@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
-include_once("db.php");
-$user = include_once("auth.php");
+include_once "db.php";
+$user = include_once "auth.php";
 
 // التحقق من الصلاحية
 if (!isset($user) || (int)$user['admin'] !== 1) {

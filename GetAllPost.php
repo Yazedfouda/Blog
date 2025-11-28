@@ -1,8 +1,7 @@
 <?php 
 header("Content-Type: application/json");
 
-include_once("db.php");
-// $user=include("auth.php");
+include_once "db.php";
 
 // التحقق من method
 

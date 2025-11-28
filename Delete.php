@@ -1,7 +1,7 @@
 <?php 
     header("Content-Type: application/json");
-    include_once("db.php");
-    $user=include_once("auth.php");
+    include_once "db.php";
+    $user=include_once "auth.php";
 
     // التحقق من الصلاحية
     if (!isset($user) || (int)$user['admin'] !== 1) {
@@ -23,9 +23,12 @@
         exit();
     }
 
+    $data = json_decode(file_get_contents("php://input"), true);
+        $postId = $data['id'] ?? null;
+
     try{
         $stmt=$con->prepare("DELETE FROM posts WHERE id = :id");
-        $stmt->execute([":id" => $user['id']]);
+        $stmt->execute([":id" => $postId]);
 
         echo json_encode([
             "success" => true,

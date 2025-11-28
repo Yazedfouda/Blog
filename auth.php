@@ -28,8 +28,10 @@ try {
     if (!$user) {
         http_response_code(403);
         echo json_encode(
-            ["success" => false, 
-            "message" => "Login is Required"]);
+            [
+                "success" => false, 
+            "message" => "Login is Required"
+        ]);
         exit;
     }
 

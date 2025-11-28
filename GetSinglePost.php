@@ -1,6 +1,6 @@
 <?php 
     header("Content-Type: application/json");
-    include_once("db.php");
+    include_once "db.php";
 
     // التحقق من method
     if($_SERVER['REQUEST_METHOD'] !== "GET"){
@@ -12,17 +12,7 @@
         exit;
     }
 
-    $data= json_decode(file_get_contents("php://input"));
-
-    if(empty($data['id']) || !is_int($data['id'])){
-        echo json_encode([
-            "success" => false,
-            "message" => "Id is Required"
-        ]);
-        exit;
-    }
-
-    $id=(int)$data['id'];
+    $id=$_GET['id'];
 
     try{
         $stmt=$con->prepare("SELECT * FROM posts WHERE id= :id");

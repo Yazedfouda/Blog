@@ -1,7 +1,7 @@
 <?php 
 header("Content-Type: application/json");
 
-include_once("db.php");
+include_once "db.php";
 
 // التحقق من method
 
@@ -16,7 +16,14 @@ if($_SERVER['REQUEST_METHOD'] !== "POST"){
 
 // جلب كل الهيدر
 $headers=getallheaders();
-$token=$headers['Authorization'] ?? $headers['authorization'] ?? null;
+$authHeader=$headers['Authorization'] ?? $headers['authorization'] ?? null;
+
+$token = trim($authHeader);
+if (stripos($token, "Bearer ") === 0) {
+    $token = substr($token, 7);
+}
+$token = trim($token);
+
 
 if(!$token){
     http_response_code(401);

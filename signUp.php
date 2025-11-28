@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-include_once("db.php");
+include_once "db.php";
 
 // التحقق من request
 if ($_SERVER['REQUEST_METHOD'] !== "POST") {

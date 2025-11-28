@@ -1,8 +1,8 @@
     <?php 
 
-        header("Content-Type: applicattion/json");
-        include_once("db.php");
-        $user=include("auth.php");
+        header("Content-Type: application/json");
+        include_once "db.php";
+        $user=include "auth.php";
 
 
         // التحقق من ان المستخدم هوا الادمن
@@ -53,11 +53,13 @@ if (!isset($user) || (int)$user['admin'] !== 1) {
         $author=trim(strip_tags($data['author']));
 
         try{
-            $stmt=$con->prepare("UPDATE posts SET title= :title , description= :description , author= :author");
-            $stmt->bindParam(":title" , $title, PDO::PARAM_STR);
-            $stmt->bindParam(":description" , $description, PDO::PARAM_STR);
-            $stmt->bindParam(":author" , $author, PDO::PARAM_STR);
-            $stmt->execute();
+        $stmt=$con->prepare("UPDATE posts SET title=:title, description=:description, author=:author WHERE id=:id");
+        $stmt->execute([
+            ":title" => $title,
+            ":description" => $description,
+            ":author" => $author,
+            ":id" => $data['id']
+        ]);
 
             echo json_encode([
                 "success" => true,

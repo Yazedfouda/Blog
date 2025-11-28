@@ -6,7 +6,7 @@ $password="root";
 
 try{
     $con=new PDO($dbname,$username,$password);
-    $con->setAttribute(PDO::ERRMODE_EXCEPTION,PDO::ATTR_ERRMODE);
+$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch(PDOException $e){
     http_response_code(500);
